@@ -1,0 +1,63 @@
+anim(Xsol,X0,ttitle,fps,res):=block(
+wxanimate_framerate:fps,
+wxplot_size:res,
+rlist:makelist(t,t,1,length(Xsol[1])),
+P1trace(r):=[makelist(sin(Xsol[1][i]),i,1,r),makelist(-cos(Xsol[1][i]),i,1,r)],
+P2trace(r):=[makelist(sin(Xsol[1][i])+sin(Xsol[1][i]+Xsol[2][i]),i,1,r),makelist(-cos(Xsol[1][i])-cos(Xsol[1][i]+Xsol[2][i]),i,1,r)],
+with_slider_draw(
+ r,rlist, 
+     nticks=100,
+     color="#CECECE",
+     line_width=1,
+     xrange=[-2.5,2.5],
+     yrange=[-2.5,2.5],
+    
+    title=concat("Double Pendulum Simulation,  t: ", ttitle[r]," (non-dimnsionalized using mgl) IC: θ_1 =", float(round(X0[1]/%pi*100)/100), "π,  θ_2 =", float(round(X0[2]/%pi*100)/100)," π"),
+    xlabel="x*", 
+    ylabel="y*",
+    
+    /*axes*/
+     explicit(0,x1,-4,4),
+     parametric(0,t,t,-4,4),
+    
+    /*First pendulum rod*/
+     line_type=solid,  
+     color=black,
+     line_width=2, 
+     parametric(t*sin(Xsol[1][r]),-t*cos(Xsol[1][r]),t,0,1),
+    
+    /*Second pendulum rod*/
+     line_type=solid,
+     color=black,
+     line_width=2, 
+     parametric(sin(Xsol[1][r])+t*sin(Xsol[1][r]+Xsol[2][r]),-cos(Xsol[1][r])-t*cos(Xsol[1][r]+Xsol[2][r]),t,0,1),
+    
+    /*First pendulum trace*/
+      line_width=2,
+      color="#5DE2E7",
+      point_size=0.05,
+      point_type=7,
+      points_joined=true, 
+      points(transpose(apply('matrix,P1trace(r)))),
+    
+    /*Second pendulum trace*/
+      line_width=2,
+      color="#5DE2E7",
+      point_size=0.05,
+      point_type=7,
+      points_joined=true, 
+      points(transpose(apply('matrix,P2trace(r)))),
+    
+    /*Pup of the first pendulum*/
+     point_type=7,
+     point_size=4,
+     color=red,
+     points([[sin(Xsol[1][r]),-cos(Xsol[1][r])]]),
+    
+    /*Pup of the second pendulum*/
+     point_type=7,
+     point_size=4,
+     color=red,
+     points([[sin(Xsol[1][r]) + sin(Xsol[1][r] + Xsol[2][r]) ,-cos(Xsol[1][r])-cos(Xsol[1][r]+Xsol[2][r])]])
+)
+)$

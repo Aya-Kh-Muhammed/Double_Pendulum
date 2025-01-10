@@ -1,0 +1,4 @@
+rk4sol(X0,tsol):=block(ttitle:makelist(float(round(t * 100) / 100),t,tsol[1],tsol[2],tsol[3]),
+sol: rk(Xdot, X, X0,[t, tsol[1], tsol[2], tsol[3]]),
+Xsol:[makelist(0,i,1,length(sol),1),makelist(0,i,1,length(sol),1),makelist(0,i,1,length(sol),1),makelist(0,i,1,length(sol),1)],
+for i:1 thru length(sol) do (Xsol[1][i]:sol[i][2],Xsol[2][i]:sol[i][3],Xsol[3][i]:sol[i][4],Xsol[4][i]:sol[i][5]))$

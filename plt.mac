@@ -1,0 +1,30 @@
+plt(Xsol,X0,ttitle):=block(
+wxdraw2d(
+    points_joined=true,
+points(transpose(apply('matrix,[ttitle,Xsol[1]]))),
+    title=concat("q_1 vs t (non-dimnsionalized using mgl) IC: θ_1 =", float(round(X0[1]/%pi*100)/100), "π,  θ_2 =", float(round(X0[2]/%pi*100)/100)," π"),
+    xlabel="t*sqrt(g/l)", 
+    ylabel="q_1"
+),
+wxdraw2d(
+    points_joined=true,
+points(transpose(apply('matrix,[ttitle,Xsol[2]]))),
+    title=concat("q_2 vs t (non-dimnsionalized using mgl)  IC: θ_1 =", float(round(X0[1]/%pi*100)/100), "π,  θ_2 =", float(round(X0[2]/%pi*100)/100)," π"),
+    xlabel="t*sqrt(g/l)", 
+    ylabel="q_2"
+),
+wxdraw2d(
+    points_joined=true,
+points(transpose(apply('matrix,[ttitle,Xsol[3]]))),
+    title=concat("p_1 vs t (non-dimnsionalized using mgl)  IC: θ_1 =", float(round(X0[1]/%pi*100)/100), "π,  θ_2 =", float(round(X0[2]/%pi*100)/100)," π"),
+    xlabel="t*sqrt(g/l)", 
+    ylabel="p_1"
+),
+wxdraw2d(
+    points_joined=true,
+points(transpose(apply('matrix,[ttitle,Xsol[4]]))),
+    title=concat("p_2 vs t (non-dimnsionalized using mgl)  IC: θ_1 =", float(round(X0[1]/%pi*100)/100), "π,  θ_2 =", float(round(X0[2]/%pi*100)/100)," π"),
+    xlabel="t*sqrt(g/l)", 
+    ylabel="p_2"
+)
+)$
